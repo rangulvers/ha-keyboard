@@ -111,8 +111,9 @@ def runDebug(midiPort):
     print("############### DEBUG")
     midiInput = mido.open_input(midiPort)
     for msg in midiInput:
-        print("--------")
-        print(msg)
+        if msg.type == "note_on":
+            print("--------")
+            print(msg)
 
     # Main entry Point
 if __name__ == "__main__":
