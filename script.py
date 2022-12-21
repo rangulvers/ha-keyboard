@@ -31,7 +31,7 @@ def convertMidiToRGB(note):
    
 #    rrad = round(rad/360,4)
 
-    r, g, b = colorsys.hls_to_rgb(rad, 0.5, 0.5)
+    r, g, b = colorsys.hls_to_rgb(rad, 0.5, 1)
 
     rgb_color = [round(r*255), round(g*255), round(b*255)]
 
