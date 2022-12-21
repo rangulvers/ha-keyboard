@@ -22,13 +22,11 @@ segments = 11
 #             (OldMax - OldMin)) + NewMin
 
 
-
-
 def convertMidiToRGB(note):
 
     n = degrees / segments
     rad = round((n*note/degrees), 4)
-   
+
 #    rrad = round(rad/360,4)
 
     r, g, b = colorsys.hls_to_rgb(rad, 0.5, 1)
@@ -116,11 +114,6 @@ def runDebug(midiPort):
     midiInput = mido.open_input(midiPort)
     for msg in midiInput:
         logging.debug(msg)
-        # if msg.type == "note_on":
-        #    brightness_pct = convertMidiVelocityToRange(msg.velocity)
-        #    color = convertMidiToRGB(msg.note)
-        #    print(f"{msg.velocity} ==> {brightness_pct} | {msg.note} ==> {color}")
-        #    changeLightToHA(brightness_pct, color, light)
 
     # Main entry Point
 if __name__ == "__main__":
