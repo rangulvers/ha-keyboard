@@ -5,7 +5,7 @@ import time
 import logging
 import traceback
 import colorsys
-# glob
+
 server = "http://192.168.2.136:8123"
 endpoint = "api"
 
