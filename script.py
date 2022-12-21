@@ -108,12 +108,10 @@ def listPorts():
 
 
 def runDebug(midiPort):
-    logging.basicConfig(format='%(levelname)s%:%(message)s',
-                        level=logging.DEBUG)
-    logging.info("####STARTING DEBUG####")
+    print("############### DEBUG")
     midiInput = mido.open_input(midiPort)
     for msg in midiInput:
-        logging.debug(msg)
+        print(msg)
 
     # Main entry Point
 if __name__ == "__main__":
@@ -151,11 +149,11 @@ if __name__ == "__main__":
 
     if args.ports:
         listPorts()
+    elif args.debug:
+        runDebug(args.midi)
     elif args.midi:
         main(args.midi, args.light)
     elif args.demo:
         playDemo(args.light)
-    elif args.debug:
-        runDebug(args.midi)
     else:
         parser.print_help()
