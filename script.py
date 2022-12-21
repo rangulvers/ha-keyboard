@@ -28,22 +28,6 @@ def convertMidiToRGB(note):
 
     rgb_color = [round(r*255), round(g*255), round(b*255)]
 
-    # if note in range(1, 11):
-    #     rgb_color = [192, 57, 43]
-    # if note in range(11, 20):
-    #     rgb_color = [155, 89, 182]
-    # if note in range(20, 30):
-    #     rgb_color = [41, 128, 185]
-    # if note in range(30, 40):
-    #     rgb_color = [26, 188, 156]
-    # if note in range(40, 50):
-    #     rgb_color = [39, 174, 96]
-    # if note in range(50, 60):
-    #     rgb_color = [241, 196, 15]
-    # if note in range(60, 70):
-    #     rgb_color = [243, 156, 18]
-    # if note in range(70, 90):
-    #     rgb_color = [211, 84, 0]
     return rgb_color
 
 
