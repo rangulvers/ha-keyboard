@@ -111,6 +111,7 @@ def runDebug(midiPort):
     print("############### DEBUG")
     midiInput = mido.open_input(midiPort)
     for msg in midiInput:
+        print("--------")
         print(msg)
 
     # Main entry Point
