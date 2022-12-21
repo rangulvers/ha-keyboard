@@ -99,16 +99,17 @@ def listPorts():
         logging.error(traceback.format_exc())
 
 
-def runDebug(midiPort, light):
-    logging.info("######### STARTING DEBUG MODE #########")
+def runDebug(midiPort):
+    logging.basicConfig(format='%(levelname)s%:%(message)s', level=logging.DEBUG)
+    logging.info("####STARTING DEBUG####")
     midiInput = mido.open_input(midiPort)
     for msg in midiInput:
         logging.debug(msg)
-        if msg.type == "note_on":
-            brightness_pct = convertMidiVelocityToRange(msg.velocity)
-            color = convertMidiToRGB(msg.note)
-            print(f"{msg.velocity} ==> {brightness_pct} | {msg.note} ==> {color}")
-            changeLightToHA(brightness_pct, color, light)
+        #if msg.type == "note_on":
+        #    brightness_pct = convertMidiVelocityToRange(msg.velocity)
+        #    color = convertMidiToRGB(msg.note)
+        #    print(f"{msg.velocity} ==> {brightness_pct} | {msg.note} ==> {color}")
+        #    changeLightToHA(brightness_pct, color, light)
 
     # Main entry Point
 if __name__ == "__main__":
@@ -151,6 +152,6 @@ if __name__ == "__main__":
     elif args.demo:
         playDemo(args.light)
     elif args.debug:
-        runDebug(args.midi, args.light)
+        runDebug(args.midi)
     else:
         parser.print_help()
