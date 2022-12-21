@@ -15,16 +15,23 @@ headers = {
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJmMTZiN2VhNGM4ZWU0NDM2OTU0Mjg0ZDdmOWRmNmM5YSIsImlhdCI6MTY3MTUzODEyNiwiZXhwIjoxOTg2ODk4MTI2fQ.T3YJ-KGTN6BOp0VR0_3rQ5ILgW0NsA3XKZH0hF60GVs"
 }
 
+degrees = 360
+segments = 11
+
 # NewValue = (((OldValue - OldMin) * (NewMax - NewMin)) /
 #             (OldMax - OldMin)) + NewMin
 
 
+
+
 def convertMidiToRGB(note):
 
-    n = 360/88
-    rad = round(n*note)
+    n = degrees / segments
+    rad = round((n*note/degrees), 4)
+   
+#    rrad = round(rad/360,4)
 
-    r, g, b = colorsys.hls_to_rgb(rad/360, 0.5, 0.5)
+    r, g, b = colorsys.hls_to_rgb(rad, 0.5, 0.5)
 
     rgb_color = [round(r*255), round(g*255), round(b*255)]
 
