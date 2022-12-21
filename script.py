@@ -19,7 +19,6 @@ headers = {
 
 
 def convertMidiToRGB(note):
-
     if note in range(1, 11):
         rgb_color = [192, 57, 43]
     if note in range(11, 20):
@@ -36,28 +35,19 @@ def convertMidiToRGB(note):
         rgb_color = [243, 156, 18]
     if note in range(70, 90):
         rgb_color = [211, 84, 0]
-
     return rgb_color
 
 
-def convertMidiVelocityRange(velocity):
+def convertMidiVelocityToRange(velocity):
     newVelocity = round((((velocity - 0) * (100 - 0)) /
                          (127 - 0)) + 0)
     return newVelocity
 
 
-def convertMidiColorRange(note):
-    newColor = (((note - 1) * (7142 - 1538)) /
-                (88 - 1)) + 1538
-    return newColor
-
-
-def changeLight(brightness_pct, color):
+def changeLightToHA(brightness_pct, color, light):
     data = {
-        "entity_id": "light.extended_color_light_9",
+        "entity_id": light,
         "brightness_pct": brightness_pct,
-        # "color_temp_kelvin": color
-        # "xy_color": color,
         "rgb_color": color
     }
 
@@ -72,28 +62,29 @@ def changeLight(brightness_pct, color):
 # Main Loop to listen to MIDI Input from Keyboard
 
 
-def main(midiPort):
+def main(midiPort, light):
     midiInput = mido.open_input(midiPort)
     for msg in midiInput:
-        if msg.type is "note_on":
-            brightness_pct = convertMidiVelocityRange(msg.velocity)
+        if msg.type == "note_on":
+            brightness_pct = convertMidiVelocityToRange(msg.velocity)
             color = convertMidiToRGB(msg.note)
             print(f"{msg.velocity} ==> {brightness_pct} | {msg.note} ==> {color}")
-            changeLight(brightness_pct, color)
+            changeLightToHA(brightness_pct, color, light)
 
 # Play Demo File
 
 
-def playDemo():
+def playDemo(light):
     mid = mido.MidiFile('bells.mid')
     brightness_pct = 0
 
     for msg in mid.play():
-        if msg.type is "note_on":
-            brightness_pct = convertMidiVelocityRange(msg.velocity)
+        if msg.type == "note_on":
+            brightness_pct = convertMidiVelocityToRange(msg.velocity)
             color = convertMidiToRGB(msg.note)
-            print(f"{msg.velocity} ==> {brightness_pct} | {msg.note} ==> {color}")
-            changeLight(brightness_pct, color)
+            print(
+                f"Vel : {msg.velocity} ==> Bright : {brightness_pct} || Note : {msg.note} ==> Color : {color}")
+            changeLightToHA(brightness_pct, color, light)
 
         time.sleep(0.2)
 
@@ -108,7 +99,18 @@ def listPorts():
         logging.error(traceback.format_exc())
 
 
-# Main entry Point
+def runDebug(midiPort, light):
+    logging.info("######### STARTING DEBUG MODE #########")
+    midiInput = mido.open_input(midiPort)
+    for msg in midiInput:
+        logging.debug(msg)
+        if msg.type == "note_on":
+            brightness_pct = convertMidiVelocityToRange(msg.velocity)
+            color = convertMidiToRGB(msg.note)
+            print(f"{msg.velocity} ==> {brightness_pct} | {msg.note} ==> {color}")
+            changeLightToHA(brightness_pct, color, light)
+
+    # Main entry Point
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
@@ -116,25 +118,39 @@ if __name__ == "__main__":
         "--midi",
         dest="midi"
     )
+
+    parser.add_argument(
+        "--light",
+        dest="light",
+        nargs="?",
+        type=str,
+        const="light.extended_color_light_9",  # Poster Basement,
+        default="light.extended_color_light_9"
+    )
     parser.add_argument(
         "--ports",
         dest="ports",
         action="store_true"
-
     )
     parser.add_argument(
         "--demo",
         dest="demo",
         action="store_true"
     )
-
+    parser.add_argument(
+        "--debug",
+        dest="debug",
+        action="store_true"
+    )
     args = parser.parse_args()
 
     if args.ports:
         listPorts()
     elif args.midi:
-        main(args.midi)
+        main(args.midi, args.light)
     elif args.demo:
-        playDemo()
+        playDemo(args.light)
+    elif args.debug:
+        runDebug(args.midi, args.light)
     else:
         parser.print_help()
