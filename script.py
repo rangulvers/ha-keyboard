@@ -27,8 +27,6 @@ def convertMidiToRGB(note):
     n = degrees / segments
     rad = round((n*note/degrees), 4)
 
-#    rrad = round(rad/360,4)
-
     r, g, b = colorsys.hls_to_rgb(rad, 0.5, 1)
 
     rgb_color = [round(r*255), round(g*255), round(b*255)]
@@ -52,7 +50,7 @@ def changeLightToHA(brightness_pct, color, light):
     # Send the request to call the service
     response = requests.post(
         f"{server}/{endpoint}/services/light/turn_on", json=data, headers=headers)
-    # print(response)
+
     # Check the response status code
     if response.status_code != 200:
         print("Error calling service:", response.text)
@@ -114,6 +112,7 @@ def runDebug(midiPort):
         if msg.type == "note_on":
             print("--------")
             print(msg)
+
 
     # Main entry Point
 if __name__ == "__main__":
