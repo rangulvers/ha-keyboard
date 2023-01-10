@@ -22,10 +22,10 @@ def start_mqtt_server():
     mqtt_client.connect(config['MQTT']['Broker'], int(config['MQTT']['Port']))
 
 
-def main():
+def live_keyboard():
     midi.connect()
 
-    for msg in midi.get_midi_input():
+    for msg in midi.get_midi_input():  # TODO : Need to check if this works
         if msg.type == "note_on":
             brightness_pct = midi.convert_midi_velocity_to_range(msg.velocity)
             color = midi.convert_midi_note_to_rgb(msg.note)
@@ -53,7 +53,7 @@ def main():
         elif userInput == '2':
             ha.get_lights()
         elif userInput == '3':
-            main()
+            live_keyboard()
         elif userInput == '8':
             start_mqtt_server()
         elif userInput == '0':
@@ -65,4 +65,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    live_keyboard()

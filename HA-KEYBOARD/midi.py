@@ -8,7 +8,7 @@ class Midi():
     midi_port = None
     midi_input = None
     degrees = 360
-    segements = 11
+    segements = 11  # Pianos have 88 Keys. This splits them up into chunks of 8. ajust the number for more detailed color changes
 
     def __init__(self) -> None:
         pass
