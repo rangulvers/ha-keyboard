@@ -8,7 +8,7 @@ class Midi():
     midi_port = None
     midi_input = None
     degrees = 360
-    segements = 80
+    segements = 11
 
     def __init__(self) -> None:
         pass
@@ -39,6 +39,7 @@ class Midi():
         return rgb_color
 
     def convert_midi_velocity_to_range(self, velocity):
+        # MIDI Velocity Range 0 - 127 https://www.cs.cmu.edu/~rbd/papers/velocity-icmc2006.pdf
         newVelocity = round((((velocity - 0) * (100 - 0)) /
                             (127 - 0)) + 0)
         return newVelocity
