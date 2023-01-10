@@ -24,7 +24,9 @@ class Homeassistant():
             if e['entity_id'].startswith("light") and 'xy' in e['attributes']['supported_color_modes']:
                 # lights.append(
                 #     [e['entity_id'], e['attributes']['friendly_name']])
-                lights.append(e['attributes']['friendly_name'])
+                import pprint
+                pprint(e)
+                # lights.append(e['attributes']['friendly_name'])
         for idx, l in enumerate(lights):
             print(f"{idx}.  {l}")
         print('X.   Cancle')
