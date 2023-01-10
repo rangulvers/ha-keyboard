@@ -23,7 +23,6 @@ def start_mqtt_server():
 
 
 def startProgramm():
-
     midi.connect()
 
     for msg in midi.get_midi_input():
@@ -40,7 +39,7 @@ def main():
         print(' 1. List availabe MIDI Ports')
         print(' 2. List available Lights ')
         print(' 3. Start Programm')
-        print(' 8. Start Server')
+        print(' 8. Connect MQTT')
         print(' 9. Exit')
         userInput = input('\n Enter your selection: ')
 

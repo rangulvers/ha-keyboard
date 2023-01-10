@@ -4,6 +4,7 @@ import paho.mqtt.client as paho
 class Mqtt():
 
     client = None
+    topic = 'haKeyboard/#'
 
     def __init__(self) -> None:
         pass
@@ -28,5 +29,8 @@ class Mqtt():
         self.client = paho.Client()
         self.client.on_publish = self.on_publish
         self.client.on_connect = self.on_connect
+        self.client.on_message = self.on_message
+        self.client.on_subscribe = self.on_subscribe
         self.client.connect(broker, port)
+        self.client.subscribe(self.topic)
         self.client.loop_start()
