@@ -46,7 +46,7 @@ class Midi():
     def play_demo(self, homeassistant):
         import time
 
-        demo = mido.MidiFile('bells.midi')
+        demo = mido.MidiFile('bells.mid')
 
         for msg in demo.play():
             if msg.type == "note_on":
