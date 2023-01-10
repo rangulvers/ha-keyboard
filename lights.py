@@ -7,7 +7,7 @@ config = configparser.ConfigParser()
 config.read("config.ini")
 
 mqtt_client = None
-midi = None
+midi = Midi()
 
 headers = {
     "Content-Type": "application/json",
@@ -23,7 +23,7 @@ def start_mqtt_server():
 
 
 def startProgramm():
-    midi = Midi()
+
     midi.connect()
 
     for msg in midi.get_midi_input():
