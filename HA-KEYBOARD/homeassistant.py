@@ -25,7 +25,7 @@ class Homeassistant():
                 # lights.append(
                 #     [e['entity_id'], e['attributes']['friendly_name']])
                 import pprint
-                pprint(e)
+                pprint.pprint(e)
                 # lights.append(e['attributes']['friendly_name'])
         for idx, l in enumerate(lights):
             print(f"{idx}.  {l}")
