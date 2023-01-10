@@ -56,7 +56,7 @@ class Midi():
                 print(
                     f"Vel : {msg.velocity} ==> Bright : {brightness_pct} || Note : {msg.note} ==> Color : {color}")
                 homeassistant.change_light(
-                    brightness_pct, color, homeassistant.light)
+                    brightness_pct, color)
 
                 time.sleep(0.2)
         pass
