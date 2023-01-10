@@ -52,7 +52,7 @@ class Midi():
             if msg.type == "note_on":
                 brightness_pct = self.convert_midi_velocity_to_range(
                     msg.velocity)
-                color = self.convert_midi_note_to_rgb()(msg.note)
+                color = self.convert_midi_note_to_rgb(msg.note)
                 print(
                     f"Vel : {msg.velocity} ==> Bright : {brightness_pct} || Note : {msg.note} ==> Color : {color}")
                 homeassistant.change_light(
