@@ -22,11 +22,12 @@ class Homeassistant():
         entitites = response.json()
         for e in entitites:
             if e['entity_id'].startswith("light") and 'xy' in e['attributes']['supported_color_modes']:
-                # lights.append(
-                #     [e['entity_id'], e['attributes']['friendly_name']])
-                import pprint
-                pprint.pprint(e)
-                # lights.append(e['attributes']['friendly_name'])
+                try:
+                    lights.append(
+                        [e['entity_id'], e['attributes']['friendly_name']])
+                except:
+                    pass
+
         for idx, l in enumerate(lights):
             print(f"{idx}.  {l}")
         print('X.   Cancle')
