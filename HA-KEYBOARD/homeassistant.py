@@ -22,7 +22,8 @@ class Homeassistant():
         entitites = response.json()
         for e in entitites:
             if e['entity_id'].startswith("light") and 'xy' in e['attributes']['supported_color_modes']:
-                lights.append(e['entity_id'])
+                lights.append([e['entity_id'], e['attributes']
+                              ['friendly_name']])
         for idx, l in enumerate(lights):
             print(f"{idx}.  {l}")
         print('X.   Cancle')
@@ -32,7 +33,7 @@ class Homeassistant():
         if sl == "X":
             return
         else:
-            self.light = lights[int(sl)]
+            self.light = lights[int(sl)][0]
             print(f"\n Selected : {self.light}")
 
     def change_light(self, brightness_pct, color):
