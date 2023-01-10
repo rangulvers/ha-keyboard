@@ -21,7 +21,7 @@ class Mqtt():
     def on_connect(self, client, userdata, flags, rc):
         print('CONNACK received with code %d.' % (rc))
 
-    def on_subscribe(client, userdata, mid, granted_qos):
+    def on_subscribe(self, client, userdata, mid, granted_qos):
         print("Subscribed: "+str(mid)+" "+str(granted_qos))
 
     def connect(self, broker, port=1883):
