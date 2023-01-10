@@ -68,8 +68,9 @@ def main():
         print(' 2. List available Lights ')
         print(' 3. Start Programm')
         print(' 8. Connect MQTT')
-        print(' 9. Exit')
-        userInput = input('\n Enter your selection: ')
+        print(' 0. Play Demo Song')
+        print(' X. Exit')
+        userInput = input('\n Enter your selection: ').upper()
 
         if userInput == '1':
             midi.list_midi_ports()
@@ -79,6 +80,8 @@ def main():
             main()
         elif userInput == '8':
             start_mqtt_server()
+        elif userInput == '0':
+            play_demo_song()
         elif userInput == '9':
             return
         else:
