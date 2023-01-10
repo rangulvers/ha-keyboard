@@ -29,7 +29,7 @@ class Homeassistant():
                     pass
 
         for idx, l in enumerate(lights):
-            print(f"{idx}.  {l}")
+            print(f"{idx}.  {l[1]}")
         print('X.   Cancle')
 
         sl = input('\n Please select a light : ').upper()
@@ -38,7 +38,7 @@ class Homeassistant():
             return
         else:
             self.light = lights[int(sl)][0]
-            print(f"\n Selected : {self.light}")
+            print(f"\n Selected : {lights[int(sl)][1]} ({self.light}) ")
 
     def change_light(self, brightness_pct, color):
         data = {
