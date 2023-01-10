@@ -13,6 +13,12 @@ class Midi():
     def __init__(self) -> None:
         pass
 
+    def get_midi_input(self):
+        return self.midi_input
+
+    def connect(self):
+        self.midi_input = mido.open_input(self.midi_port)
+
     def list_midi_ports(self):
         try:
             midiPort = mido.get_input_names()
@@ -37,8 +43,20 @@ class Midi():
                             (127 - 0)) + 0)
         return newVelocity
 
-    def connect(self):
-        self.midi_input = mido.open_input(self.midi_port)
+    def play_demo(self, homeassistant):
+        import time
 
-    def get_midi_input(self):
-        return self.midi_input
+        demo = mido.MidiFile('bells.midi')
+
+        for msg in demo.play():
+            if msg.type == "note_on":
+                brightness_pct = self.convert_midi_velocity_to_range(
+                    msg.velocity)
+                color = self.convert_midi_note_to_rgb()(msg.note)
+                print(
+                    f"Vel : {msg.velocity} ==> Bright : {brightness_pct} || Note : {msg.note} ==> Color : {color}")
+                homeassistant.change_light(
+                    brightness_pct, color, homeassistant.light)
+
+                time.sleep(0.2)
+        pass
