@@ -24,7 +24,7 @@ class Mqtt():
     def on_subscribe(self, client, userdata, mid, granted_qos):
         print("Subscribed: "+str(mid)+" "+str(granted_qos))
 
-    def publish(self, data):
+    def send_message(self, data):
         self.client.publish(f'{self.topic}/demoSong', data)
 
     def connect(self, broker, port=1883):
