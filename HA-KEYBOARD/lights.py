@@ -6,7 +6,7 @@ from homeassistant import Homeassistant
 config = configparser.ConfigParser()
 config.read("config.ini")
 
-mqtt_client = None
+mqtt_client = Mqtt()
 midi = Midi()
 
 headers = {
@@ -18,7 +18,6 @@ ha = Homeassistant(headers, config['HASERVER']
 
 
 def start_mqtt_server():
-    mqtt_client = Mqtt()
     mqtt_client.connect(config['MQTT']['Broker'], int(config['MQTT']['Port']))
 
 
