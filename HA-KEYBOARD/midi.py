@@ -48,12 +48,13 @@ class Midi():
                             (127 - 0)) + 0)
         return newVelocity
 
-    def play_demo(self, homeassistant):
+    def play_demo(self, homeassistant, mqtt):
         import time
         demo = mido.MidiFile('bells.mid')
 
         for msg in demo.play():
             if msg.type == "note_on":
+                mqtt.publish(msg)
                 brightness_pct = self.convert_midi_velocity_to_range(
                     msg.velocity)
                 color = self.convert_midi_note_to_rgb(msg.note)

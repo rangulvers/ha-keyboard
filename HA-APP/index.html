@@ -33,15 +33,14 @@
         </script>
     <script src="https://unpkg.com/mqtt@4.3.7/dist/mqtt.min.js"></script>
     <script>
-        const client = mqtt.connect('ws://broker.mqttdashboard.com')
+        const client = mqtt.connect('wss://test.mosquitto.org:8081')
         client.subscribe("ha-keyboard/#")
 
         client.on("message", function (topic, payload) {
-            alert([topic, payload].join(": "))
-            client.end()
+            console.log(payload)
         })
 
-        client.publish("mqtt/demo", "hello world!")
+        client.publish("ha-keyboard/demo", "hello world!")
     </script>
 </body>
 

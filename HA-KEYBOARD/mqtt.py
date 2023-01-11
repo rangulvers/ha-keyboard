@@ -24,8 +24,10 @@ class Mqtt():
     def on_subscribe(self, client, userdata, mid, granted_qos):
         print("Subscribed: "+str(mid)+" "+str(granted_qos))
 
-    def connect(self, broker, port=1883):
+    def publish(self, data):
+        self.client.publish('ha-keyboard/demoSong', data)
 
+    def connect(self, broker, port=1883):
         self.client = paho.Client()
         self.client.on_publish = self.on_publish
         self.client.on_connect = self.on_connect

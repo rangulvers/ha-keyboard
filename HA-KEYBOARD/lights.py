@@ -27,7 +27,7 @@ def live_keyboard():
 
 
 def play_demo_song():
-    midi.play_demo(ha)
+    midi.play_demo(ha, mqtt_client)
 
 
 def main():
