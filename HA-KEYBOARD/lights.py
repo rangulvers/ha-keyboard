@@ -23,14 +23,7 @@ def start_mqtt_server():
 
 
 def live_keyboard():
-    midi.connect()
-
-    for msg in midi.get_midi_input():  # TODO : Need to check if this works
-        if msg.type == "note_on":
-            brightness_pct = midi.convert_midi_velocity_to_range(msg.velocity)
-            color = midi.convert_midi_note_to_rgb(msg.note)
-            print(f"{msg.velocity} ==> {brightness_pct} | {msg.note} ==> {color}")
-            ha.change_light(brightness_pct, color)
+    midi.connect(ha)
 
 
 def play_demo_song():

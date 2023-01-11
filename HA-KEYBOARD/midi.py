@@ -6,18 +6,21 @@ import colorsys
 class Midi():
 
     midi_port = None
-    midi_input = None
     degrees = 360
     segements = 11  # Pianos have 88 Keys. This splits them up into chunks of 8. ajust the number for more detailed color changes
 
     def __init__(self) -> None:
         pass
 
-    def get_midi_input(self):
-        return self.midi_input
-
-    def connect(self):
-        self.midi_input = mido.open_input(self.midi_port)
+    def connect(self, homeassistant):
+        for msg in mido.open_input(self.midi_port):
+            if msg.type == "note_on":
+                brightness_pct = self.midi.convert_midi_velocity_to_range(
+                    msg.velocity)
+                color = self.midi.convert_midi_note_to_rgb(msg.note)
+                print(
+                    f"{msg.velocity} ==> {brightness_pct} | {msg.note} ==> {color}")
+                homeassistant.change_light(brightness_pct, color)
 
     def list_midi_ports(self):
         try:
@@ -29,6 +32,7 @@ class Midi():
             print(traceback.format_exc())
 
     def convert_midi_note_to_rgb(self, note):
+        # https://www.rapidtables.com/convert/color/rgb-to-hsl.html
         n = self.degrees / self.segements
         rad = round((n*note/self.degrees), 4)
 
@@ -46,7 +50,6 @@ class Midi():
 
     def play_demo(self, homeassistant):
         import time
-
         demo = mido.MidiFile('bells.mid')
 
         for msg in demo.play():
@@ -60,4 +63,3 @@ class Midi():
                     brightness_pct, color)
 
                 time.sleep(0.2)
-        pass
