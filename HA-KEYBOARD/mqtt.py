@@ -4,7 +4,7 @@ import paho.mqtt.client as paho
 class Mqtt():
 
     client = None
-    topic = 'haKeyboard/#'
+    topic = 'ha-keyboard/#'
 
     def __init__(self) -> None:
         pass
@@ -25,7 +25,7 @@ class Mqtt():
         print("Subscribed: "+str(mid)+" "+str(granted_qos))
 
     def publish(self, data):
-        self.client.publish('ha-keyboard/demoSong', data)
+        self.client.publish(f'{self.topic}/demoSong', data)
 
     def connect(self, broker, port=1883):
         self.client = paho.Client()
