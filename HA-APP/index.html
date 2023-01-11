@@ -33,8 +33,8 @@
         </script>
     <script src="https://unpkg.com/mqtt@4.3.7/dist/mqtt.min.js"></script>
     <script>
-        const client = mqtt.connect('wss://broker.mqttdashboard.com')
-        client.subscribe("mqtt/demo")
+        const client = mqtt.connect('ws://broker.mqttdashboard.com')
+        client.subscribe("ha-keyboard/#")
 
         client.on("message", function (topic, payload) {
             alert([topic, payload].join(": "))
