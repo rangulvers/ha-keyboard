@@ -6,8 +6,8 @@ class Mqtt():
     client = None
     topic = 'ha-keyboard/#'
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, topic='ha-keyboard/#'):
+        self.topic = topic
 
     def on_subscribe(self, client, userdata, mid, granted_qos):
         print("Subscribed: "+str(mid)+" "+str(granted_qos))
