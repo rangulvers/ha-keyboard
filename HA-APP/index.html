@@ -37,7 +37,7 @@
         client.subscribe("ha-keyboard/#")
 
         client.on("message", function (topic, payload) {
-            console.log(payload)
+            console.log("TOPIC : " + topic + " | PAYLOAD : " + payload)
         })
 
         client.publish("ha-keyboard/demo", "hello world!")
