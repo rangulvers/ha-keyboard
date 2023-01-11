@@ -55,7 +55,7 @@ class Midi():
         for msg in demo.play():
             if msg.type == "note_on":
 
-                mqtt.send_message(msg)
+                mqtt.send_message(msg.note)
                 brightness_pct = self.convert_midi_velocity_to_range(
                     msg.velocity)
                 color = self.convert_midi_note_to_rgb(msg.note)
