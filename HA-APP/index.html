@@ -33,7 +33,7 @@
         </script>
     <script src="https://unpkg.com/mqtt@4.3.7/dist/mqtt.min.js"></script>
     <script>
-        const client = mqtt.connect('ws://broker.mqttdashboard.com')
+        const client = mqtt.connect('wss://broker.mqttdashboard.com')
         client.subscribe("mqtt/demo")
 
         client.on("message", function (topic, payload) {
