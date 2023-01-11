@@ -55,7 +55,6 @@ class Midi():
         for msg in demo.play():
             if msg.type == "note_on":
 
-                mqtt.send_message(int(msg.note))
                 brightness_pct = self.convert_midi_velocity_to_range(
                     msg.velocity)
                 color = self.convert_midi_note_to_rgb(msg.note)
@@ -63,5 +62,5 @@ class Midi():
                     f"Vel : {msg.velocity} ==> Bright : {brightness_pct} || Note : {msg.note} ==> Color : {color}")
                 homeassistant.change_light(
                     brightness_pct, color)
-
+                mqtt.send_message(int(msg.note))
                 time.sleep(0.2)
