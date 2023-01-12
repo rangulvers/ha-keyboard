@@ -6,7 +6,10 @@ from homeassistant import Homeassistant
 config = configparser.ConfigParser()
 config.read("config.ini")
 
-mqtt_client = Mqtt()
+mqtt_client = Mqtt(config['MQTT']['Server'],
+                   config['MQTT']['Port'],
+                   config['MQTT']['Topic']
+                   )
 midi = Midi()
 
 headers = {
@@ -18,10 +21,14 @@ ha = Homeassistant(headers, config['HASERVER']
 
 
 def start_mqtt_server():
-    mqtt_client.connect(config['MQTT']['Broker'], int(config['MQTT']['Port']))
+    """Start the MQTT Server and connect to the broker defined in the config.ini file
+    """
+    mqtt_client.connect()
 
 
 def live_keyboard():
+    """listen to the live played notes from the connected keyboard
+    """
     midi.connect(ha)
 
 

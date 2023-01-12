@@ -1,9 +1,15 @@
-import mido
 import traceback
 import colorsys
+import time
+import mido
 
 
 class Midi():
+
+    """MIDI Class to controll interaction with MIDI ports
+        Returns:
+            MIDI: MIDI Controller
+    """
 
     midi_port = None
     degrees = 360
@@ -13,6 +19,11 @@ class Midi():
         pass
 
     def connect(self, homeassistant):
+        """connect midi controller to midi port
+
+        Args:
+            homeassistant (homeassistant): homeassistant object
+        """
         for msg in mido.open_input(self.midi_port):
             if msg.type == "note_on":
                 brightness_pct = self.midi.convert_midi_velocity_to_range(
@@ -23,15 +34,25 @@ class Midi():
                 homeassistant.change_light(brightness_pct, color)
 
     def list_midi_ports(self):
+        """list all available midi ports 
+        """
         try:
             midiPort = mido.get_input_names()
             for idx, midi in enumerate(midiPort):
                 print(f"{idx}.  {midiPort}")
 
         except Exception as e:
-            print(traceback.format_exc())
+            print(traceback.format_exc(e))
 
     def convert_midi_note_to_rgb(self, note):
+        """Convert the currently played note to an RGB value
+
+        Args:
+            note (MIDI NOTE): Note
+
+        Returns:
+            int[R,G,B]: RGB Color Value
+        """
         # https://www.rapidtables.com/convert/color/rgb-to-hsl.html
         n = self.degrees / self.segements
         rad = round((n*note/self.degrees), 4)
@@ -49,7 +70,7 @@ class Midi():
         return newVelocity
 
     def play_demo(self, homeassistant, mqtt):
-        import time
+
         demo = mido.MidiFile('bells.mid')
 
         for msg in demo.play():

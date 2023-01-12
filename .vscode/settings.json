@@ -1,6 +1,7 @@
 {
   "python.linting.pylintEnabled": false,
-  "python.linting.pycodestyleEnabled": true,
+  "python.linting.pycodestyleEnabled": false,
   "python.linting.enabled": true,
-  "python.analysis.typeCheckingMode": "off"
+  "python.analysis.typeCheckingMode": "off",
+  "python.linting.flake8Enabled": true
 }

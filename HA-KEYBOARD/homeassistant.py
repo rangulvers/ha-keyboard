@@ -2,6 +2,8 @@ import requests
 
 
 class Homeassistant():
+    """Controller to connect to Homeassistant and controll the lights
+    """
 
     light = None
     headers = None
@@ -14,6 +16,8 @@ class Homeassistant():
         self.endpoint = endpoint
 
     def get_lights(self):
+        """get the available lights from the Homeassistant API
+        """
         lights = []
         print('\n ========== LIGHTS ========== ')
         response = requests.get(
@@ -25,7 +29,7 @@ class Homeassistant():
                 try:
                     lights.append(
                         [e['entity_id'], e['attributes']['friendly_name']])
-                except:
+                except e:
                     pass
 
         for idx, l in enumerate(lights):
@@ -41,6 +45,12 @@ class Homeassistant():
             print(f"\n Selected : {lights[int(sl)][1]} ({self.light}) ")
 
     def change_light(self, brightness_pct, color):
+        """Change the color and brightness of a light
+
+        Args:
+            brightness_pct (int): based on midi velocity
+            color (RGB): RGB Color Value
+        """
         data = {
             "entity_id": self.light,
             "brightness_pct": brightness_pct,
