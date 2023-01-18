@@ -33,6 +33,7 @@
         </script>
     <script src="https://unpkg.com/mqtt@4.3.7/dist/mqtt.min.js"></script>
     <script>
+        # TODO: Create own JS Script that also listens to inputs like the mqtt topics
         const client = mqtt.connect('wss://test.mosquitto.org:8081')
         client.subscribe("ha-keyboard/#")
 

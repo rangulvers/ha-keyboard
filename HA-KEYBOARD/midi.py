@@ -34,13 +34,19 @@ class Midi():
                 homeassistant.change_light(brightness_pct, color)
 
     def list_midi_ports(self):
+        # FIXME : test if this works on RPI
         """list all available midi ports 
         """
         try:
             midiPort = mido.get_input_names()
             for idx, midi in enumerate(midiPort):
                 print(f"{idx}.  {midiPort}")
+            select_midi_port = input('\n Please select a midi port: ').upper()
 
+            if select_midi_port == "X":
+                return
+            else
+            self.midi_port = midiPort[int(select_midi_port)][0]
         except Exception as e:
             print(traceback.format_exc(e))
 

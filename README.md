@@ -23,6 +23,7 @@ X. EXIT
 ````
 
 ### 1. List available MIDI Ports
+
 This will list all available MIDI Ports connect to the device
 
 Output
@@ -33,19 +34,24 @@ Output
 ````
 
 ### 2. List available Lights
+
 This will list all available lights available in homeassistant that are capable to change their RGB value. 
 You must select on of the lights in order to run the program
 
 ### 3. Start Program
+
 This will start the program and will listen to any MIDI input coming from the the MIDI port and change the selected light RGB and brightness value
 
 ### 8. Connect MQTT
+
 This will start a MQTT connection to the defined MQTT Broker in the ````config.ini````and broadcast the played note to the MQTT broker
 
 ### 0. Play Demo Song
+
 This will play a demo song and change the lights based on the MIDI input from the song
 
 ### X. Exit
+
 Exit program
 
 ## Config.ini
