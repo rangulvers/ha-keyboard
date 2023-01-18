@@ -7,7 +7,7 @@ config = configparser.ConfigParser()
 config.read("config.ini")
 
 mqtt_client = Mqtt(config['MQTT']['Broker'],
-                   config['MQTT']['Port'],
+                   int(config['MQTT']['Port']),
                    config['MQTT']['Topic']
                    )
 midi = Midi()
