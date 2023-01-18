@@ -45,8 +45,8 @@ class Midi():
 
             if select_midi_port == "X":
                 return
-            else
-            self.midi_port = midiPort[int(select_midi_port)][0]
+            else:
+                self.midi_port = midiPort[int(select_midi_port)][0]
         except Exception as e:
             print(traceback.format_exc(e))
 
