@@ -6,7 +6,7 @@ from homeassistant import Homeassistant
 config = configparser.ConfigParser()
 config.read("config.ini")
 
-mqtt_client = Mqtt(config['MQTT']['Server'],
+mqtt_client = Mqtt(config['MQTT']['Broker'],
                    config['MQTT']['Port'],
                    config['MQTT']['Topic']
                    )
