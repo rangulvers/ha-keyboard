@@ -29,7 +29,7 @@ class Homeassistant():
                 try:
                     lights.append(
                         [e['entity_id'], e['attributes']['friendly_name']])
-                except e:
+                except:
                     pass
 
         for idx, l in enumerate(lights):
