@@ -1,4 +1,6 @@
 import configparser
+import typer
+from rich import print
 from midi import Midi
 from mqtt import Mqtt
 from homeassistant import Homeassistant
@@ -45,7 +47,7 @@ def main():
         print(' 8. Connect MQTT')
         print(' 0. Play Demo Song')
         print(' X. Exit')
-        userInput = input('\n Enter your selection: ').upper()
+        userInput = typer.prompt('Enter your selection: ').upper()
 
         if userInput == '1':
             midi.list_midi_ports()
@@ -60,8 +62,8 @@ def main():
         elif userInput == '9':
             return
         else:
-            print('\n Select from Main Menu')
+            print('Select from Main Menu')
 
 
 if __name__ == '__main__':
-    main()
+    typer.run(main)

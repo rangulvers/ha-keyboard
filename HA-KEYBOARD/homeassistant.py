@@ -1,4 +1,6 @@
 import requests
+import typer
+from rich import print
 
 
 class Homeassistant():
@@ -36,7 +38,7 @@ class Homeassistant():
             print(f"{idx}.  {l[1]}")
         print('X.   Cancle')
 
-        sl = input('\n Please select a light : ').upper()
+        sl = typer.prompt('Please select a light : ').upper()
 
         if sl == "X":
             return
