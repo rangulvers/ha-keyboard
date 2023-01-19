@@ -1,9 +1,18 @@
 import configparser
 import typer
 from rich import print
+from rich.table import Table
+from rich import pretty
+from rich.console import Console
 from midi import Midi
 from mqtt import Mqtt
 from homeassistant import Homeassistant
+
+app = typer.Typer(
+    add_completion=False,
+    rich_markup_mode='rich',
+    no_args_is_help=False
+)
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -38,15 +47,25 @@ def play_demo_song():
     midi.play_demo(ha, mqtt_client)
 
 
+#
+# Main
+#
+@app.command()
 def main():
+
+    main_menu = Table('ID', 'Option')
+    main_menu.add_row('1.', 'List available MIDI Ports')
+    # def main():
     while True:
         print("\n ========== [MAIN MENU] ==========")
-        print(' 1. List availabe MIDI Ports')
-        print(' 2. List available Lights ')
-        print(' 3. Start Programm')
-        print(' 8. Connect MQTT')
-        print(' 0. Play Demo Song')
-        print(' X. Exit')
+        main.menu.add_row('1.', 'List availabe MIDI Ports')
+        main.menu.add_row('2.', 'List available Lights ')
+        main.menu.add_row('3.', 'Start Programm')
+        main.menu.add_row('8.', 'Connect MQTT')
+        main.menu.add_row('0.', 'Play Demo Song')
+        main.menu.add_row('X.', 'Exit')
+        console = Console()
+        console.print(main_menu)
         userInput = typer.prompt('Enter your selection: ').upper()
 
         if userInput == '1':
