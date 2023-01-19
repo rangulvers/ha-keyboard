@@ -58,12 +58,12 @@ def main():
     # def main():
     while True:
         print("\n ========== [MAIN MENU] ==========")
-        main.menu.add_row('1.', 'List availabe MIDI Ports')
-        main.menu.add_row('2.', 'List available Lights ')
-        main.menu.add_row('3.', 'Start Programm')
-        main.menu.add_row('8.', 'Connect MQTT')
-        main.menu.add_row('0.', 'Play Demo Song')
-        main.menu.add_row('X.', 'Exit')
+        main_menu.add_row('1.', 'List availabe MIDI Ports')
+        main_menu.add_row('2.', 'List available Lights ')
+        main_menu.add_row('3.', 'Start Programm')
+        main_menu.add_row('8.', 'Connect MQTT')
+        main_menu.add_row('0.', 'Play Demo Song')
+        main_menu.add_row('X.', 'Exit')
         console = Console()
         console.print(main_menu)
         userInput = typer.prompt('Enter your selection: ').upper()
