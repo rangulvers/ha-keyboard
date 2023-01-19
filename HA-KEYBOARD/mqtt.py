@@ -1,5 +1,5 @@
 import paho.mqtt.client as paho
-from richt import print
+from rich import print
 
 
 class Mqtt():
